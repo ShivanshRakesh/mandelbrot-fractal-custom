@@ -62,6 +62,7 @@ export class FractalImageComponent implements OnInit {
   @Input() settings: string;
   @Input() motion: string;
   @Input() stereo: boolean;
+  @Output('url') url = new EventEmitter<any>();
 
   constructor(private ngzone: NgZone) {
   }
@@ -130,7 +131,8 @@ export class FractalImageComponent implements OnInit {
     var json = JSON.stringify(this.desired_image_properties);
     var img_url = "http://fractalvalley.net/img?json=" + json;
     // console.log(json)
-    console.log(img_url)
+    // console.log(img_url)
+    this.url.emit(img_url);
     $(".image").attr("src", img_url);
   }
   
@@ -152,9 +154,10 @@ export class FractalImageComponent implements OnInit {
     this.present_image_properties = (JSON.parse(JSON.stringify(this.desired_image_properties)));
     
     let img_url = "http://fractalvalley.net/img?json=" + json;
-    console.log(this.desired_image_properties); 
+    // console.log(this.desired_image_properties); 
     // console.log(json)
-    console.log(img_url)
+    console.log("Img URL:" + img_url)
+    this.url.emit(img_url);
     $(".image").attr("src", img_url);
   }
 
